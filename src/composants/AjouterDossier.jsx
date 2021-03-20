@@ -10,41 +10,52 @@ import { TwitterPicker } from 'react-color';
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
-  const [couleur, setCouleur] = useState('#900');
+  const [couleur, setCouleur] = useState('#537169');
+  const couleurs = ['#74eedf', '#9900ef', '#3397ef', '#fccd49', '#fd6d9e', '#ff7b00'];
+
+  function viderChamps() {
+    setNom('');
+    setCouverture('');
+    setCouleur('#537169');
+  }
 
   return (
     <div className="AjouterDossier">
-      <Dialog open={ouvert} onClose={()=>setOuvert(false)} aria-labelledby="form-dialog-title">
+      <Dialog margin="normal" open={ouvert} onClose={()=>setOuvert(false)} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Ajouter un dossier</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
-            margin="dense"
+            margin="normal"
             id="nomDossier"
             label="Nom du dossier"
             type="text"
             fullWidth
             onChange={(e) => setNom(e.target.value)}
+            defaultValue={nom}
           />
           <TextField
-            margin="dense"
+            margin="normal"
             id="urlImage"
             label="Adresse de l'image de couverture"
             type="text"
             fullWidth
             onChange={(e) => setCouverture(e.target.value)}
+            defaultValue={couverture}
           />
           <TwitterPicker 
             width="100%" 
-            triangle="hide" 
+            triangle="hide"
+            colors={couleurs}
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
+            color={couleur}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setOuvert(false)} color="primary">
+          <Button style={{backgroundColor: "#990000", color: "white"}} onClick={()=>{setOuvert(false); viderChamps()}} color="primary">
             Annuler
           </Button>
-          <Button onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} color="primary">
+          <Button style={{backgroundColor: "#009900", color: "white"}} onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} color="primary">
             Ajouter
           </Button>
         </DialogActions>
