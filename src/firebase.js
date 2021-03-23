@@ -3,9 +3,9 @@ import * as firebaseui from 'firebaseui';
 import 'firebase/firestore';
 
 // Configuration (mettez-y les vôtres !)
-const firebaseConfig = {
+// const firebaseConfig = {
  
-};
+// };
 
 // Initialiser Firebase
 if(!firebase.apps.length) {
